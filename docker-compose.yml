@@ -1,0 +1,13 @@
+services:
+  dashboard:
+    build: .
+    image: adaptive-optimization:latest
+    container_name: adaptive-optimization-dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./datasets/raw:/app/datasets/raw
+      - ./results:/app/results
+    env_file:
+      - .env.example
+    restart: unless-stopped
