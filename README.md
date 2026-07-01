@@ -8,12 +8,12 @@ Streamlit dashboard.
 <p align="left">
   <img alt="Python" src="https://img.shields.io/badge/python-3.12%2B-blue">
   <img alt="License" src="https://img.shields.io/badge/license-MIT-green">
-  <img alt="Tests" src="https://img.shields.io/badge/tests-64%20passing-brightgreen">
+  <img alt="Tests" src="https://github.com/Denxhinjo/adaptive-optimization/actions/workflows/tests.yml/badge.svg">
   <img alt="NumPy only" src="https://img.shields.io/badge/optimizers-pure%20NumPy-orange">
 </p>
 
-> **Live demo:** _add your deployed Streamlit URL here after publishing (see [Deployment](#deployment))_
-> **Repository:** _add your GitHub URL here after publishing_
+> **Repository:** https://github.com/Denxhinjo/adaptive-optimization
+> **Live demo:** _not yet deployed — see [Deployment](#deployment) to publish it to Streamlit Community Cloud in ~2 minutes_
 
 ![Rosenbrock optimizer race](assets/benchmark_rosenbrock_trajectories.png)
 
@@ -137,7 +137,7 @@ adaptive-optimization/
 ## Installation
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Denxhinjo/adaptive-optimization.git
 cd adaptive-optimization
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
