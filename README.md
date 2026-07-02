@@ -13,7 +13,8 @@ Streamlit dashboard.
 </p>
 
 > **Repository:** https://github.com/Denxhinjo/adaptive-optimization
-> **Live demo:** _not yet deployed — see [Deployment](#deployment) to publish it to Streamlit Community Cloud in ~2 minutes_
+> **Project page:** https://denxhinjo.github.io/adaptive-optimization/ (static, GitHub Pages)
+> **Interactive dashboard:** _not yet deployed — GitHub Pages can't run a live Python server; see [Deployment](#deployment) to publish it to Streamlit Community Cloud in ~2 minutes_
 
 ![Rosenbrock optimizer race](assets/benchmark_rosenbrock_trajectories.png)
 
@@ -458,10 +459,15 @@ docker run -p 8501:8501 adaptive-optimization
 
 ## Deployment
 
-The dashboard is a standard Streamlit app and deploys to
+**Static project page:** this README, with every figure/table/GIF, is already live at
+https://denxhinjo.github.io/adaptive-optimization/ via GitHub Pages (root of `main`, no
+build step needed). That's a static page, though — it can't run the interactive dashboard,
+which needs a live Python process.
+
+**Interactive dashboard:** the dashboard is a standard Streamlit app and deploys to
 [Streamlit Community Cloud](https://streamlit.io/cloud) for free:
 
-1. Push this repository to GitHub.
+1. This repository is already on GitHub.
 2. On [share.streamlit.io](https://share.streamlit.io), click **New app**, select the repo,
    and set the main file path to `streamlit_app/app.py`.
 3. Streamlit Cloud installs `requirements.txt` automatically; no secrets are required
