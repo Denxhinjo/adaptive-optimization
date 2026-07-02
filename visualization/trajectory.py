@@ -10,7 +10,7 @@ from matplotlib import animation
 from benchmarks.functions import BenchmarkFunction
 from experiments.benchmark_runner import BenchmarkRun
 
-from .style import apply_style, color_for
+from .style import apply_style, color_for, linestyle_for
 
 apply_style()
 
@@ -51,10 +51,18 @@ def plot_contour_with_trajectories(
     fig, ax = plt.subplots(figsize=(8, 7))
     plot_contour(fn, ax=ax, levels=levels)
 
+    # Different optimizers can take nearly the same route (e.g. a well-tuned
+    # Adam vs. L-BFGS on Rosenbrock) -- solid-on-solid would let the
+    # later-drawn line fully hide the earlier one. Vary linestyle + alpha so
+    # every trajectory stays visible even when paths coincide.
     for i, (name, run) in enumerate(runs.items()):
         traj = run.trajectory
         c = color_for(name, i)
-        ax.plot(traj[:, 0], traj[:, 1], color=c, linewidth=1.8, marker="o", markersize=2.5, label=name)
+        ls = linestyle_for(i)
+        ax.plot(
+            traj[:, 0], traj[:, 1], color=c, linewidth=2.2, linestyle=ls, alpha=0.85,
+            marker="o", markersize=2.5, label=name,
+        )
         ax.plot(traj[0, 0], traj[0, 1], marker="s", color=c, markersize=8, markeredgecolor="black")
         ax.plot(traj[-1, 0], traj[-1, 1], marker="X", color=c, markersize=10, markeredgecolor="black")
 
@@ -74,7 +82,10 @@ def plot_convergence_curves(runs: dict[str, BenchmarkRun]) -> plt.Figure:
     fig, ax = plt.subplots(figsize=(7, 4.5))
     for i, (name, run) in enumerate(runs.items()):
         losses = np.asarray(run.losses)
-        ax.plot(losses - min(losses.min(), 0) + 1e-12, label=name, color=color_for(name, i), linewidth=2)
+        ax.plot(
+            losses - min(losses.min(), 0) + 1e-12, label=name,
+            color=color_for(name, i), linestyle=linestyle_for(i), linewidth=2, alpha=0.85,
+        )
     ax.set_yscale("log")
     ax.set_xlabel("Iteration")
     ax.set_ylabel("f(x, y) (shifted, log scale)")
@@ -107,7 +118,7 @@ def animate_trajectories(
     lines, points = {}, {}
     for i, name in enumerate(runs):
         c = color_for(name, i)
-        (line,) = ax.plot([], [], color=c, linewidth=1.8, label=name)
+        (line,) = ax.plot([], [], color=c, linewidth=2.2, linestyle=linestyle_for(i), alpha=0.85, label=name)
         (point,) = ax.plot([], [], marker="o", color=c, markersize=7, markeredgecolor="black")
         lines[name] = line
         points[name] = point

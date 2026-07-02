@@ -61,7 +61,7 @@ and software engineering practice together in one library:
 - **9 comparison metrics** auto-tabulated across optimizers (loss, accuracy, gradient norm,
   convergence speed, runtime, memory, stability, ...)
 - **An interactive Streamlit dashboard** to train, race, and compare optimizers live
-- **64 unit/integration tests** (gradient checks via finite differences, convergence checks,
+- **65 unit/integration tests** (gradient checks via finite differences, convergence checks,
   visualization smoke tests)
 
 ## Key Features
@@ -123,7 +123,7 @@ adaptive-optimization/
 ├── visualization/            # static plots + animated contour/trajectory GIFs
 ├── streamlit_app/            # interactive dashboard (see below)
 ├── notebooks/                # 4 narrative Jupyter notebooks
-├── tests/                    # 64 pytest tests (gradient checks, convergence, viz smoke tests)
+├── tests/                    # 65 pytest tests (gradient checks, convergence, viz smoke tests)
 ├── assets/                   # generated figures/tables embedded in this README
 ├── results/                  # raw CSV dumps from generate_results.py (gitignored)
 ├── Dockerfile, docker-compose.yml
@@ -408,7 +408,7 @@ for the full ranked breakdown.
 ## Testing
 
 ```bash
-pytest                       # 64 tests: gradient checks, convergence, viz smoke tests
+pytest                       # 65 tests: gradient checks, convergence, viz smoke tests
 pytest --cov=. --cov-report=term-missing
 ```
 

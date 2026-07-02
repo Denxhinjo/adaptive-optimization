@@ -22,6 +22,17 @@ def color_for(name: str, fallback_index: int = 0) -> str:
     return DEFAULT_CYCLE[fallback_index % len(DEFAULT_CYCLE)]
 
 
+# On problems like Rosenbrock, a well-tuned adaptive method's path can nearly
+# coincide with L-BFGS's -- same color trajectories drawn solid-on-solid can
+# fully occlude one another. Distinct dash patterns keep every trajectory
+# visible even when two optimizers take almost the same route.
+LINESTYLE_CYCLE = ["-", "--", "-.", (0, (1, 1)), (0, (3, 1, 1, 1))]
+
+
+def linestyle_for(fallback_index: int) -> str | tuple:
+    return LINESTYLE_CYCLE[fallback_index % len(LINESTYLE_CYCLE)]
+
+
 PLOT_STYLE = {
     "figure.facecolor": "white",
     "axes.facecolor": "white",
