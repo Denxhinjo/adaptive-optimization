@@ -14,7 +14,6 @@ Streamlit dashboard.
 
 > **Repository:** https://github.com/Denxhinjo/adaptive-optimization
 > **Project page:** https://denxhinjo.github.io/adaptive-optimization/ (static, GitHub Pages)
-> **Interactive dashboard:** _not yet deployed — GitHub Pages can't run a live Python server; see [Deployment](#deployment) to publish it to Streamlit Community Cloud in ~2 minutes_
 
 ![Rosenbrock optimizer race](assets/benchmark_rosenbrock_trajectories.png)
 
@@ -28,7 +27,6 @@ Streamlit dashboard.
 - [Project Structure](#project-structure)
 - [Installation](#installation)
 - [Quickstart](#quickstart)
-- [Interactive Dashboard](#interactive-dashboard)
 - [Mathematical Background](#mathematical-background)
   - [Gradient Descent](#gradient-descent)
   - [Stochastic Gradient Descent](#stochastic-gradient-descent-sgd)
@@ -44,8 +42,6 @@ Streamlit dashboard.
   - [a9a — Binary Classification](#a9a--binary-classification)
   - [MNIST — Multi-Class Classification](#mnist--multi-class-classification)
 - [Testing](#testing)
-- [Docker](#docker)
-- [Deployment](#deployment)
 - [Future Improvements](#future-improvements)
 - [References](#references)
 - [License](#license)
@@ -180,23 +176,6 @@ result = compare_optimizers(lambda: LogisticRegression(l2=1e-4), optimizers,
                              epochs=50, batch_size=64)
 print(result.table)   # one row per optimizer: loss, accuracy, runtime, memory, ...
 ```
-
-## Interactive Dashboard
-
-```bash
-streamlit run streamlit_app/app.py
-```
-
-Four pages:
-
-| Page | What it does |
-|---|---|
-| **Overview** | Project summary + update equations for every optimizer |
-| **Benchmark Playground** | Pick a benchmark function + optimizers + learning rates, race them, view contour/trajectory plots, convergence curves, and render an animated GIF |
-| **Train a Classifier** | Pick a dataset (a9a / MNIST / instant synthetic), model, optimizer, batch size, and learning rate; watch **live** loss/accuracy/gradient-norm curves update during training; get a confusion matrix + training stats |
-| **Compare Optimizers** | Train several optimizers side-by-side on the same task; auto-generated comparison table + charts, downloadable as CSV |
-
-See [Deployment](#deployment) for the public live-demo link and Docker instructions.
 
 ## Mathematical Background
 
@@ -442,40 +421,6 @@ Test coverage includes:
 - **State management** — `optimizer.reset()` correctly clears momentum/accumulator state
 - **Integration** — `Trainer`, `compare_optimizers`, `benchmark_runner` end-to-end
 - **Visualization smoke tests** — every plotting function renders headlessly without error
-
-## Docker
-
-```bash
-docker compose up --build
-# dashboard now at http://localhost:8501
-```
-
-or directly:
-
-```bash
-docker build -t adaptive-optimization .
-docker run -p 8501:8501 adaptive-optimization
-```
-
-## Deployment
-
-**Static project page:** this README, with every figure/table/GIF, is already live at
-https://denxhinjo.github.io/adaptive-optimization/ via GitHub Pages (root of `main`, no
-build step needed). That's a static page, though — it can't run the interactive dashboard,
-which needs a live Python process.
-
-**Interactive dashboard:** the dashboard is a standard Streamlit app and deploys to
-[Streamlit Community Cloud](https://streamlit.io/cloud) for free:
-
-1. This repository is already on GitHub.
-2. On [share.streamlit.io](https://share.streamlit.io), click **New app**, select the repo,
-   and set the main file path to `streamlit_app/app.py`.
-3. Streamlit Cloud installs `requirements.txt` automatically; no secrets are required
-   (see `.env.example` for the optional configuration surface).
-4. Add the resulting public URL to the top of this README.
-
-Docker deployment (any container host — Fly.io, Render, Railway, a VPS, ...) works the same
-way via the included `Dockerfile` / `docker-compose.yml`.
 
 ## Future Improvements
 
